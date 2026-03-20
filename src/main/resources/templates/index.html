@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngọc Tiên | Backend Developer Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            /* Slate 900 */
+            --surface-color: #1e293b;
+            /* Slate 800 */
+            --primary-color: #3b82f6;
+            /* Blue 500 */
+            --text-main: #f8fafc;
+            /* Slate 50 */
+            --text-muted: #94a3b8;
+            /* Slate 400 */
+            --accent-color: #10b981;
+            /* Emerald 500 */
+            --border-color: #334155;
+            /* Slate 700 */
+            --glass-bg: rgba(30, 41, 59, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.15), transparent 25%);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 4rem 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        .contact-info div:hover {
+            color: var(--text-main);
+        }
+
+        .contact-info i {
+            color: var(--primary-color);
+        }
+
+        /* Section Styles */
+        section {
+            margin-bottom: 3.5rem;
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* Staggered Animations */
+        section:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        section:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        section:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        section:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title i {
+            color: var(--accent-color);
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border-color: var(--primary-color);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .duration {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+        }
+
+        .role {
+            font-weight: 600;
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+        }
+
+        ul {
+            list-style-type: none;
+            color: var(--text-muted);
+        }
+
+        ul li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        ul li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Skills Layout */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .tag:hover {
+            background: rgba(59, 130, 246, 0.2);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Keyframes */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .duration {
+                align-self: flex-start;
+                margin-top: 0.5rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Header / Hero Section -->
+        <header>
+            <!-- Sử dụng placeholder Image giả định, bạn có thể đổi link ảnh thực tế -->
+            <img src="https://ui-avatars.com/api/?name=Ngoc+Tien&background=1e293b&color=3b82f6&size=200"
+                alt="Ngọc Tiên" class="profile-img">
+            <h1>Ngọc Tiên</h1>
+            <h2>Backend Developer</h2>
+
+            <div class="contact-info">
+                <div><i class="fas fa-envelope"></i> <a href="mailto:tienngoc@hello.com">ngoctien1712@gmail.com</a>
+                </div>
+                <div><i class="fas fa-phone"></i> +84 123 456 789</div>
+                <div><i class="fas fa-map-marker-alt"></i> Hồ Chí Minh, Việt Nam</div>
+                <div><i class="fab fa-github"></i> <a href="https://github.com/ngoctien1712"
+                        target="_blank">github.com/ngoctien1712</a></div>
+                <div><i class="fab fa-linkedin"></i> <a href="#" target="_blank">linkedin.com/in/ngoctien</a></div>
+            </div>
+        </header>
+
+        <!-- About Me Section -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-user"></i> Về bản thân</h2>
+            <div class="card">
+                <p>
+                    Là một Backend Developer đam mê xây dựng các hệ thống web mạnh mẽ, hiệu suất cao và có khả năng mở
+                    rộng.
+                    Tôi có kinh nghiệm chuyên sâu làm việc với <strong>Java (Spring Boot)</strong> và <strong>Node.js
+                        (Express, RESTful APIs)</strong>.
+                    Tôi luôn chú trọng đến việc viết mã sạch (Clean Code), tối ưu hóa cơ sở dữ liệu và triển khai kiến
+                    trúc phần mềm bền vững. Mong muốn đóng góp giải pháp kỹ thuật hiệu quả và luôn sẵn sàng học hỏi
+                    những công nghệ mới.
+                </p>
+            </div>
+        </section>
+
+        <!-- Technical Skills Section -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-laptop-code"></i> Kỹ Năng Kỹ Thuật</h2>
+            <div class="card skills-grid">
+                <div class="skill-category">
+                    <h3>Ngôn ngữ &amp; Framework</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Java</span>
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">Express.js</span>
+                        <span class="tag">JavaScript/TypeScript</span>
+                        <span class="tag">HTML/CSS</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Cơ sở dữ liệu &amp; Tools</h3>
+                    <div class="skill-tags">
+                        <span class="tag">MySQL</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">Redis</span>
+                        <span class="tag">MongoDB</span>
+                        <span class="tag">Git</span>
+                        <span class="tag">Docker</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Kiến thức khác</h3>
+                    <div class="skill-tags">
+                        <span class="tag">RESTful API Design</span>
+                        <span class="tag">Microservices</span>
+                        <span class="tag">Thymeleaf</span>
+                        <span class="tag">Testing (Jest, JUnit)</span>
+                        <span class="tag">WebSockets</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-project-diagram"></i> Dự án nổi bật</h2>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Hệ thống Website Bán Hàng Trực Tuyến</span>
+                    <span class="duration">2023</span>
+                </div>
+                <div class="role">Fullstack Developer (Java J2EE & PHP)</div>
+                <ul>
+                    <li>Thực hiện migrate kiến trúc từ môi trường Laragon sang hệ thống XAMPP (Sử dụng HeidiSQL) để ổn
+                        định kết nối Database MySQL.</li>
+                    <li>Quản lý thông báo người dùng theo thời gian thực kết hợp WebSockets.</li>
+                    <li>Xây dựng Frontend sử dụng Thymeleaf, Bootstrap và tổ chức Backend xử lý Session/Cookie.</li>
+                </ul>
+                <div class="skill-tags" style="margin-top: 1rem;">
+                    <span class="tag">Java J2EE</span>
+                    <span class="tag">Thymeleaf</span>
+                    <span class="tag">MySQL</span>
+                    <span class="tag">HeidiSQL</span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Education Section -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Học Vấn</h2>
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Kỹ sư Công nghệ Thông tin</span>
+                    <span class="duration">2022 - 2026</span>
+                </div>
+                <div class="role">Đại học Công nghệ Thành Phố Hồ Chí Minh</div>
+                <ul>
+                    <li>Chuyên ngành: Công nghệ phần mềm</li>
+                    <li>Tốt nghiệp loại: Giỏi</li>
+                    <li>Chứng chỉ cơ bản: Hoàn tất khóa đào tạo thiết kế Backend Nâng cao.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 Ngọc Tiên.</p>
+        </footer>
+    </div>
+
+</body>
+
+</html>
